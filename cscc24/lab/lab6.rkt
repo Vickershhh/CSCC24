@@ -40,15 +40,10 @@
   (λ (xs)
     (define (helper xs res)
       (if (empty? xs) res
-          (if (list? (first xs)) (helper (rest xs) (+ (helper (first xs) res) res))
+          (if (list? (first xs)) (helper (rest xs) (helper (first xs) res))
               (helper (rest xs) (+ 1 res))))) (helper xs 0)))
 
-  (define num-els-4
-  (λ (xs)
-    (define (helper xs res)
-      (if (empty? xs) res
-          (if (= 1 (length (list (first xs)))) (helper (rest xs) (+ 1 res))
-             (helper (rest xs) (+ (helper (first xs) res) res)) ))) (helper xs 0)))
+
 
 
 ;;; (flatten xs) -> list
@@ -57,7 +52,9 @@
 ;;; using recursion only, no tail recursion
 (define flatten-1
   (λ (xs)
-    42))
+    (if (empty? xs) '()
+        (if (list? (first xs)) (append (flatten-1 (first xs)) (flatten-1 (rest xs)))
+            (append (list (first xs)) (flatten-1 (rest xs)))))))
 
 ;;; using HOPs (and recursion)
 (define flatten-2
@@ -67,7 +64,10 @@
 ;;; tail-recursive version
 (define flatten-3
   (λ (xs)
-    42))
+    (define (iter xs res)
+      (if (empty? xs) res
+          (if (list? (first xs)) (iter (rest xs) (iter (first xs) res))
+              (iter (rest xs) (append res (list (first xs))))))) (iter xs '())))
 
 (provide my-reverse-1 my-reverse-2 num-els-1 num-els-2 num-els-3 flatten-1 flatten-2 flatten-3)
 )
