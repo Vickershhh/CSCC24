@@ -7,8 +7,8 @@
 
 #define TRACE_64
 
-#define PAGE_SHIFT      12    // number of bits 2^(PAGE_SHIFT) == PAGE_SIZE
-#define PAGE_SIZE       4096  // Size of pagetable pages
+#define PAGE_SHIFT      12     // number of bits 2^(PAGE_SHIFT) == PAGE_SIZE
+#define PAGE_SIZE       4096 // Size of pagetable pages
 #define PAGE_MASK       (~(PAGE_SIZE-1))
 #define PG_VALID        (0x1) // Valid bit in pgd or pte, set if in memory
 #define PG_DIRTY        (0x2) // Dirty bit in pgd or pte, set if modified
@@ -47,13 +47,14 @@ typedef unsigned long addr_t;
 
 // Page directory entry (top-level)
 typedef struct { 
-  uintptr_t pde; 
+	uintptr_t pde; 
 } pgdir_entry_t;
 
 // Page table entry (2nd-level). 
 typedef struct { 
-  unsigned int frame;   // if valid bit == 1, physical frame holding vpage
-  off_t swap_off;       // offset in swap file of vpage, if any
+	unsigned int frame; // if valid bit == 1, physical frame holding vpage
+	unsigned int timestamp; // Created for lru
+	off_t swap_off;       // offset in swap file of vpage, if any
 } pgtbl_entry_t;    
 
 extern void init_pagetable();
@@ -62,10 +63,9 @@ extern char *find_physpage(addr_t vaddr, char type);
 extern void print_pagedirectory(void);
 
 struct frame {
-  char in_use;        // True if frame is allocated, False if frame is free
-  pgtbl_entry_t *pte; // Pointer back to pagetable entry (pte) for page
-                      // stored in this frame
-  addr_t vaddr;       // virtual address, used in opt
+	char in_use;       // True if frame is allocated, False if frame is free
+	pgtbl_entry_t *pte;// Pointer back to pagetable entry (pte) for page
+	                   // stored in this frame
 };
 
 /* The coremap holds information about physical memory.
