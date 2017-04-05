@@ -1,0 +1,319 @@
+CSCC63
+
+Week 1
+	
+	What's a problem?
+
+		in computer science, a problem is a task or something to be done
+	what's a decision problem: 
+		a problem where the task is to answer yes/no
+
+Week 2 TM
+	
+	DFAs
+
+		A DFA is a 5-tuple containing
+		• Set of states Q
+		• Start state q0
+		• Set of accepting states F
+		• Finite alphabet Σ
+		• Transition function δ: Σ x Q è Q
+
+		limitations of DFA:
+			finite memory (limited by the number of states
+
+
+	PDAs
+
+		A pushdown automata is a 6-tuple containing?
+		• Set of states Q
+		• Finite alphabet Σ
+		• A stack with alphabet Γ
+		• Start state q0
+		• Set of accepting states F
+		• Transition function δ: Q x Σε x Γε è P( Q x Γε )
+
+		limitations of  a PDA:
+			the memory is restricted tp the topmost value on the stack
+
+	TM
+
+		Like a DFA but has unlimited memory --> "tape"
+
+		The action of a TM is determined by:
+			the current state qi of the machine
+			the current symbol
+			the table of rules
+
+		(qi,A) --> (qj,B,L/R)
+
+		A Turing Machine is a 7-tuple containing …
+		• Set of states Q
+		• Finite alphabet Σ
+		• A tape alphabet Γ where ⊔ ∈Γ and ( Σ ⊆ Γ )
+		• Start state q0
+		• Accept state qaccept
+		• Reject state qreject
+		• Transition function δ: Q x Γε è Q x Γε x {L, R}
+
+
+
+		definition:
+
+			Given a Turing machine M. The collection of strings that M
+			accepts is the language recognized by M.
+
+			Recognizable
+			A language is Turing-recognizable or simply recognizable
+			(recursively enumerable) if some Turing machine recognizes it.
+			
+			Decider
+			A Turing machine M is a decider if M halts on all inputs. If
+			M is a decider and recognizes some language, then M
+			decides the language.
+			
+			Decidable
+			A language is Turing-decidable or simply decidable
+			(recursive) if some Turing machine decides it.
+
+Week 3
+
+	Non-Deterministic
+
+		deterministic --> At any given state, there is exactly one action possible for each input symbol.
+
+		non-deterministic -->  At any given state, there may be a set of rules or actions for each input symbol.
+
+
+		o Non-deterministic TM “accepts” if there is at least one path in computation tree that leads to qaccept.
+		o Non-deterministic TM “rejects” if every path leads to qreject.
+		o Non-deterministic TM “loops” if no path accepts and at least one path never halts. 
+
+
+	Enumerator
+
+		A TM with:
+			o No input.
+			o Two tapes and special state qprint.
+			o Machine computes and whenever it is in state qprint
+			prints string to the second tape.
+			o The language enumerated by an enumerator is the
+			set of strings printed during computation.
+
+
+Week 4
+	
+	Atm
+
+		ATM = { ⟨ M, w ⟩ | M is a TM that accepts input w }
+
+		Theorem: Atm is undecidable.
+
+			--> Actm is unrecognizable
+
+	Reducibility !!!
+
+		Goal. Prove a language L is undecidable. 
+
+		• Assume L is decidable.
+		• Therefore, there is a TM R that decides it.
+		
+		• Show that we can construct a TM S that uses R to
+		decide ATM (the acceptance problem) or some
+		other undecidable problem.
+		
+		• Since this contradicts that ATM is undecidable, L is
+		undecidable. 
+
+
+	Atm
+	Etm
+	HALTtm
+	EQtm
+
+	A2:
+	2.Let Σ = {0}. Consider subsets of Σ.Prove that there exists an undecidable subset of Σ
+		Hint: Look at how we proved the set of all languages is uncountable.
+
+
+	---------------
+	reducibility : contracdition and reducto=ion fucntion
+
+	Rice's Theorem
+
+		If P is a nontrivial property of recognizable languages, then P is undecidable.
+
+
+		Nontrivial:
+			There is at least one language that satisfies the
+			property and at least one language that does not.
+		
+		Property:
+			A property of recognizable languages means a
+			property of L(M) for TMs M that depends only on L(M)
+			and on no other aspect of M. 
+
+Week 6
+	
+	P Definition:
+		P is the class of languages that are decidable in polynomial
+		time on a deterministic single-tape Turing machine:	
+
+	NP:
+	 	A language belongs to NP iff it is decided by some nondeterministic
+		polynomial time TM.
+
+	NP-complete:
+
+		Language A is NP-complete if
+
+				A --> NP
+				A is NP-hard
+	Example:
+
+
+		CLIQUE:
+			A clique in a graph G is a complete subgraph of G. That is, it is a subset K of the vertices such that every two vertices in K are the two endpoints of an edge in G
+
+
+		Independent Set:
+			{hG, ki | G is an undirected graph that contains an independent set of size k – a subset of vertices
+			such that there is NO edge between any two of them. }
+			(node edge between elements in IS)
+
+		subset sum:
+
+			SUBSET-SUM = {⟨S, t⟩ | S = {x1, … , xk} and for some {y1, …, y2} ⊆ S ,∑ yi = t.} 
+
+		HAMILTONIAN PATH:
+
+			HAMPATH = {⟨G⟩ | G is an undirected graph that contains a Hamiltonian path} 
+
+			Hamiltonian path:  A path that includes every vertex exactly once.
+
+		SAT:
+			SAT = { F : F is a propositional formula that is satisfiable}
+			Satisfiable. There is some assignment of true/false to the variables of F that makes F true. 
+
+
+		GRAPH 3-COLOURING:
+
+			In its simplest form, it is a way of coloring the vertices of a graph such that no two adjacent vertices share the same color; this is called a vertex coloring. 
+
+
+		VERTEX-COVER:
+			{hG, ki | G is a graph that contains a vertex cover of size k}
+			A vertex-cover is a set C of k vertices such that each edge of G has at least one endpoint in c
+
+
+
+
+		KNAPSACK:
+
+			Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given limit and the total value is as large as possible
+
+
+
+		DOMINATING SET:
+
+
+			a dominating set for a graph G = (V, E) is a subset D of V such that every vertex not in D is adjacent to at least one member of D.
+
+			The dominating set problem concerns testing whether γ(G) ≤ K for a given graph G and input K; 
+			(NPc)
+
+Week 9:
+	
+	Self Reducibility
+
+		Clique-search
+
+		Input. Undirected graph G, positive integer k.
+		
+		Output. A clique of size k in G, if one exists (special value
+		NIL if there is no such clique in G).
+		
+		Assume we have an algorithm CLIQUE(G, k) that returns
+		true iff G contains a clique of size k.
+		
+		Q. Given CLIQUE(G, k), how can we create an algorithm
+		that returns the clique (if it exists)?
+		
+		A. For each vertex v in turn, remove it iff resulting graph still
+		contains a k-clique. 
+
+
+	NP-Intermediate:
+
+		problems that are in NP but not NP-hard  --->
+
+				not NP-complete and not in P belong to NPI
+
+	Space Complexty:
+
+		SPACE(f(n)) = {L : L is a language that can be decided by a
+			 TM running in worst-case space O(f(n)).} 
+
+		NSPACE(f(n)) = {L : L is a language that can be decided by a
+ 			NTM running in worst-case space O(f(n)).} 
+
+ 		space in TM --> length of tape used.
+
+
+ 		PSPACE (Polynomial SPACE): in n^k
+
+ 			PSPACE是计算复杂度理论中能被确定型图灵机利用多项式空间解决的判定问题集合
+
+ 		NPSPACE (Polynomial SPACE): in n^k
+
+ 			PSPACE是计算复杂度理论中能被非确定型图灵机利用多项式空间解决的判定问题集合
+
+ 	Space:
+
+ 		Q: which f(n) is SAT ∈ SPACE(f(n)) ?
+
+ 		A: f(n) = n (Space can be reused;time cannot)
+
+ 	Savitch's Theorem;
+
+ 		NSPACE(f(n)) ⊂ SPACE((f(n))^2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
