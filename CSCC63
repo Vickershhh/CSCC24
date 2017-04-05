@@ -277,6 +277,39 @@ Week 9:
  	Savitch's Theorem;
 
  		NSPACE(f(n)) ⊂ SPACE((f(n))^2)
+		
+		
+	Space relationships
+	
+		Q. What does this say about NPSPACE and PSPACE? A. NPSPACE = PSPACE?
+
+		A. NPSPACE = PSPACE.
+
+		Q: What about P and PSPACE?
+		A: P is a subset of PSPACE
+		Q: What about NP and NPSPACE?
+		A: NP is a subset of NPSPACE
+
+		P ⊂ NP ⊂ NPSPACE = PSPACE.
+		
+		What about coNP?  coNP = {LC|L∈NP} = {complements of languages in NP}
+		coNP ⊂ coNPSPACE = coPSPACE = PSPACE			 
+	PSPACE-Complete:
+	
+		Language A is PSPACE-complete if:
+			A ∈ PSPACE
+			• A is PSPACE-hard, ie ∀B ∈ PSPACE, B ≤p A.
+TQBF is PSPACE-complete:
+	TQBF = { φ | φ is a true, fully quantified boolean formula over domain = {0, 1} }
+
+Games
+Week 11:
+	Log Space
+		L = SPACE(log n) = {lang. decided by TM in space O(log n)}
+		NL = NSPACE(log n)= {lang, decided by NTM in space O(log n)}
+Q. How can a TM use less than linear space when it needs at least that much to store the input?
+A. Measure “work” space independently of input space by using a 2-tape TM – the second tape is a working tape.	
+
 
 
 
