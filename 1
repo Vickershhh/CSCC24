@@ -1,29 +1,119 @@
-CSCC63 A4
+Racket
 
-(a)
-WIFI: Given a graph G which represents the office location as question described and an positive integer k, is it possible to a set of vertex of size k such that all office can be covered by routers?
-Prove WIFI is NP - complete:
-Prove WIFI is NP : Given  a set of vertices S and a graph g, we add the vertices which are related by the elements in S by edges to S,then check if the element of S equal the vertices of graph g.
-Prove WIFI is NP-hard: We will reduce VERTEX-COVER to this problem.Given a graph G on n nodes,we define a office i for each node vi, and the distance of 2 offices is less than R if these 2 nodes have edge in G.Now, if there is an VERTEX-COVER of G,we can place all the routers corresponding to vertices in the set.And because of the property of VERTEX-COVER,the routers will cover all the offices for sure.At last, let k equal the size of set. Conversely, if there is a way to place at most k routers on the offices,and all offices will be covered by WIFI, this give a VERTEX-COVER of G.
-(b)
-WIFI-SEARCH:Given a graph G which represents the office location as question described and an positive integer k,find a set of vertex of size k such that all office can be covered by routers,if one exists.
-Prove WIFI-SEARCH is poly-time self-reducible:
-WIFI-SEARCH(G,k):
-           if !(WIFI(G,k))
-               return null  //  no k-router-set in G 
-           C = {} // the vertices in the WIFI set of G
-           For each vertex v ∈ V and while k >0:
-	 If (WIFI(G-v,k-1)):
-	      C = C ∪ v;
-	       G = G-v
-                       K = k -1
-             Return C
-Correctness:
-G contains a WIFI-set of size k iff G-v contains a WIFI-set of size (k-1). Then if G-v contains a WIFI-set of size (k-1), let C be a WIFI-set of size (k-1) in G – {v}, then C ∪ {v} is the WIFI-set of size k in G. Hence, the output is a WIFI-set of size k of G.
-Running Time: 
-for each vertex v, we perform one call to VC in time T(n,m) and compute G-{v} in time O(n+m).So the total time is O((n)*T(n,m) + n*(n+m)).
-(c)
-Prove MIN_WIFI is polytime self-reducible:
-Given graph G of n nodes, binary search in range [1,n] by making calls to WIFI(G,k) for various values of k,in order to find the minimum k such that G contains a k-WIFI-set but bot (k-1)-WIFI-set.Then,use search algorithm to find k-WIFI-set .Hence the output is  optimal value.
-(d)
+	lambda:
+
+		(lambda (x y z ...) (function ...))
+
+		((lambda (x y z ...) (function ...)) 1 2 3 ...) return result
+
+	define:
+
+		(define funName (lambda (x) (fun)))
+
+		(define (funcName x) (fun))
+
+	lst:
+
+		t = '(1 2 3 4 5)
+
+		(first t) = 1
+		(last t) = 5
+		(rest t) = (2 3 4 5)
+
+	append:
+
+		(append '(1 2 3) '(6 7 8)) => (1 2 3 6 7 8)
+		(append '(1 2 3) 1) => (1 2 3 . 1) this is a pair
+		(car (append '(1 2 3) 1)) => 1
+		(cdr (append '(1 2 3) 1)) => (2 3 . 1)
+
+	pair:
+
+		car:
+			(car (1 . 2)) = 1
+			(car '(1)) = 1
+		cdr:
+			(cdr (1 . 2)) = 2
+			(cdr '(1)) = ()
+
+	< > <= >=:
+	 	(< x y) ==> x<y
+
+	map:
+		(map procesure lst...) => do pro for each lst
+
+		(map + '(1 2 3) '( 2 3 4)) ==> '(3 5 7)
+
+		(map (lambda (x y) (+ 1 x y)) '(1 2 3) '( 2 3 4)) ==> '(4 6 8)
+
+	apply:
+		(apply op lst)
+		(apply + '(1 2 3)) ==> 6
+
+	fold:
+		(foldr op id lst)
+		(foldr op id ’(e1 e2 ... en)) => (op e1 (op e2 (op ... (op en id))))
+
+	cons:
+		(cons 1 2) ==> (1 . 2)
+		(cons '(1 2 3) 4) ==> ((1 2 3) . 4)
+		(cons '(1 2 3) '(2 3 4)) ==> ((1 2 3) 2 3 4)
+		(cons 2 '(2 3 4)) ==> (2 2 3 4) list
+
+
+Python:
+	
+	zip:
+		list(zip([1,2,3],[7,8,9])) = []
+
+	map and lambda:
+		map(lambda x, y: x*y, vector1, vector2)
+
+	reduce:
+		 reduce(function, iterable[, initializer])
+		 reduce(lambda x, y: x+y, [1, 2, 3, 4, 5]) ==> ((((1+2)+3)+4)+5)
+	
+		 reduce(lambda x, y: x+y, [1, 2, 3, 4, 5],8) ==> (((((8 + 1)+2)+3)+4)+5)
+
+	list compressi:
+
+		
+		[vector_add1(x, y) for x, y in zip(matrix1, matrix2)]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
